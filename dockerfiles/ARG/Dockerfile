@@ -5,3 +5,4 @@ ARG COURSE="Docker" \
     DURATION="10HRS" \
     AUTHOR="JoinDevOps"
 RUN echo "Trainer is: ${TRAINER}"
+CMD ["sleep","200"]
