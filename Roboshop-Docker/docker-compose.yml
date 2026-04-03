@@ -66,6 +66,7 @@ services:
       - catalogue
       - user
       - cart
+      - shipping
     
 
 networks:
