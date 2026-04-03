@@ -51,7 +51,6 @@ services:
       - catalogue
       - user
       - cart
-      - shipping
     ports:
       - "80:80"
 
