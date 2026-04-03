@@ -41,10 +41,13 @@ services:
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/frontend
     container_name: frontend
+    ports:
+      - "80:80"
     depends_on:
       - catalogue
       - user
       - cart
+    
 
 networks:
   default:
