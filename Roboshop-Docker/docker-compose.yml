@@ -1,5 +1,17 @@
 version: "3"
 services:
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/mongodb:1.0.0
+    container_name: mongodb
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/redis:1.0.0
+    container_name: redis
   catalogue:
     build:
       context: ./catalogue
@@ -8,13 +20,31 @@ services:
     container_name: catalogue
     depends_on:
       - mongodb
-
-  mongodb:
+  user:
     build:
-      context: ./mongodb
+      context: ./user
       dockerfile: Dockerfile
-    image: hemanthkumargurujupalli/mongodb:1.0.0
-    container_name: mongodb
+    image: hemanthkumargurujupalli/user:1.0.0
+    container_name: user
+    depends_on:
+      - redis
+  cart:
+    build:
+      context: /.cart
+      dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/cart:1.0.0
+    container_name: cart
+  
+  frontend:
+    build:
+      context: /.frontend
+      dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/frontend
+    container_name: frontend
+    depends_on:
+      - catalogue
+      - user
+      - cart
 
 networks:
   default:
