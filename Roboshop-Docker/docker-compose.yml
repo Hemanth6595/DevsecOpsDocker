@@ -48,7 +48,7 @@ services:
     container_name: cart
   shipping:
     build:
-      context: ./
+      context: ./shipping
       dockerfile: Dockerfile
     image: shipping:1.0.0
     container_name: shipping
