@@ -46,7 +46,14 @@ services:
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/cart:1.0.0
     container_name: cart
-  
+  shipping:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: shipping:1.0.0
+    container_name: shipping
+    depends_on:
+      - mysql
   frontend:
     build:
       context: ./frontend
