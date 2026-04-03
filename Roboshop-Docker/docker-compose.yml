@@ -30,7 +30,7 @@ services:
       - redis
   cart:
     build:
-      context: /.cart
+      context: ./cart
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/cart:1.0.0
     container_name: cart
