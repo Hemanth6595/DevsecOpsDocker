@@ -51,7 +51,7 @@ services:
       context: ./shipping
       dockerfile: Dockerfile
     image: shipping:1.0.0
-    container_name: shipping
+    container_name: hemanthkumargurujupalli/shipping
     depends_on:
       - mysql
   frontend:
