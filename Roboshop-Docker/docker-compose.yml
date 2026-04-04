@@ -58,7 +58,6 @@ services:
     depends_on:
       - mysql
       - cart
-
   payment:
     build:
       context: ./payment
@@ -77,8 +76,6 @@ services:
         AMQP_HOST="rabbitmq"
         AMQP_USER="roboshop"
         AMQP_PASS="roboshop123"
-
-
   frontend:
     build:
       context: ./frontend
