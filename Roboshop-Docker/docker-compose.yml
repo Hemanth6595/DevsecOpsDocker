@@ -15,9 +15,17 @@ services:
     build:
       context: ./mysql
       dockerfile: Dockerfile
-
     image: hemanthkumargurujupalli/mysql:1.0.0
     container_name: mysql
+
+  rabbitmq:
+    build:
+     context: ./rabbitmq
+     dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/rabbitmq:1.0.0
+    container_name: rabbitmq
+
+    
 
   catalogue:
     build:
@@ -35,12 +43,16 @@ services:
     container_name: user
     depends_on:
       - redis
+      - mongodb
   cart:
     build:
       context: ./cart
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/cart:1.0.0
     container_name: cart
+    depends_on:
+    - redis
+    - catalogue
   shipping:
     build:
       context: ./shipping
@@ -49,6 +61,28 @@ services:
     container_name: shipping
     depends_on:
       - mysql
+      - cart
+
+  payment:
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
+    image: hemanthkumargurujupalli/payment:1.0.0
+    container_name: payment
+    depends_on: 
+      - rabbitmq
+      - user
+      - cart
+    environment:
+      - CART_HOST="cart"
+        CART_PORT="8080"
+        USER_HOST="user"
+        USER_PORT="8080"
+        AMQP_HOST="rabbitmq"
+        AMQP_USER="roboshop"
+        AMQP_PASS="roboshop123"
+
+
   frontend:
     build:
       context: ./frontend
@@ -60,6 +94,7 @@ services:
       - user
       - cart
       - shipping
+      - payment
     ports:
       - "80:80"
 
