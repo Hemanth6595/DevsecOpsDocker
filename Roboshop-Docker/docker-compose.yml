@@ -24,6 +24,9 @@ services:
      dockerfile: Dockerfile
     image: hemanthkumargurujupalli/rabbitmq:1.0.0
     container_name: rabbitmq
+    environment: 
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
 
     
 
