@@ -4,5 +4,5 @@ WORKDIR /app
 COPY payment.ini .
 COPY *.py . 
 COPY requirements.txt .
-RUN install -r requirements.txt
+RUN pip install -r requirements.txt
 CMD ["uwsgi", "--ini", "payment.ini"]
