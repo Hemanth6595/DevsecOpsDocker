@@ -15,8 +15,8 @@ services:
     image: hemanthkumargurujupalli/mysql:1.0.0
     container_name: mysql
   rabbitmq:
-    image: rabbitmq:3
-    environment: 
+    image: rabbitmq:3-management
+    environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
     container_name: rabbitmq
