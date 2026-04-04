@@ -6,10 +6,7 @@ services:
     image: hemanthkumargurujupalli/mongodb:1.0.0
     container_name: mongodb
   redis:
-    build:
-      context: ./redis
-      dockerfile: Dockerfile
-    image: hemanthkumargurujupalli/redis:1.0.0
+    image: redis:7.0
     container_name: redis
   mysql:
     build:
