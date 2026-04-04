@@ -6,7 +6,7 @@ services:
     image: hemanthkumargurujupalli/mongodb:1.0.0
     container_name: mongodb
   redis:
-    image: redis:7.0
+    image: redis:7
     container_name: redis
   mysql:
     build:
@@ -46,6 +46,8 @@ services:
     depends_on:
     - redis
     - catalogue
+    environment:
+      REDIS_HOST: redis
   shipping:
     build:
       context: ./shipping
