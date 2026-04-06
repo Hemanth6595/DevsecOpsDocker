@@ -15,11 +15,11 @@ services:
     image: hemanthkumargurujupalli/mysql:1.0.0
     container_name: mysql
   rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    environment:
+    image: rabbitmq:3
+    environment: 
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
+    container_name: rabbitmq
   catalogue:
     build:
       context: ./catalogue
@@ -63,32 +63,33 @@ services:
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/payment:1.0.0
     container_name: payment
-    depends_on: 
-      - rabbitmq
-      - user
-      - cart
     environment:
-      - CART_HOST="cart"
-        CART_PORT="8080"
-        USER_HOST="user"
-        USER_PORT="8080"
-        AMQP_HOST="rabbitmq"
-        AMQP_USER="roboshop"
-        AMQP_PASS="roboshop123"
+      CART_HOST: "cart"
+      CART_PORT: "8080"
+      USER_HOST: "user"
+      USER_PORT: "8080"
+      AMQP_HOST: "rabbitmq"
+      AMQP_USER: "roboshop"
+      AMQP_PASS: "roboshop123"
+    depends_on:
+    - rabbitmq
+    - cart
+    - user
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     image: hemanthkumargurujupalli/frontend
     container_name: frontend
+    ports:
+    - "80:80"
     depends_on:
       - catalogue
       - user
       - cart
       - shipping
       - payment
-    ports:
-      - "80:80"
+    
 
     
 
