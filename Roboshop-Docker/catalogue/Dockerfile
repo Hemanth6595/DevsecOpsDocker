@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20.20.2-alphine3.23
 # This creates and move to the app directory
 WORKDIR /app
 COPY package.json .
